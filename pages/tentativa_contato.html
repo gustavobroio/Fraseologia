@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Tentativa de contato</title>
+
+<link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Ajuste para campos de texto ocuparem toda a largura */
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <a href="https://experian.okta.com" target="_blank">
+  <img src="../assets/images/logo_serasa.png" 
+       alt="Serasa" 
+       class="logo" 
+       onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+</a>
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h1>Tentativa de contato</h1>
+    <p>Realizar as tentativas de contato a cada período. Ex: se a primeira tentativa for hoje à tarde, a próxima deve ser amanhã de manhã.</p>
+    <div class="dica">
+      ⚠️ <strong>Importante:</strong> Status do chamado deve ser <strong>On Hold (Em Espera)</strong>.<br>
+      Após a 3ª tentativa sem sucesso, o chamado será finalizado.
+    </div>
+    <hr>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📞 Tentativa</label>
+        <select id="tentativa">
+          <option value="Informamos que foi efetuada a 1ª tentativa de contato. Após a 3ª tentativa sem sucesso, seu chamado será finalizado.">1ª tentativa</option>
+          <option value="Informamos que foi efetuada a 2ª tentativa de contato. Após a 3ª tentativa sem sucesso, seu chamado será finalizado.">2ª tentativa</option>
+          <option value="Informamos que foi efetuada a 3ª tentativa de contato sem sucesso e o seu chamado será finalizado. Caso seja necessário, entre em contato conosco para a abertura de um novo.">3ª tentativa</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>🌞 Período do Contato</label>
+        <select id="periodo">
+          <option value="Bom dia!">Manhã</option>
+          <option value="Boa tarde!">Tarde</option>
+          <option value="Boa noite!">Noite</option>
+        </select>
+      </div>
+
+      <!-- Data e Hora na mesma linha -->
+      <div style="display: flex; gap: 1rem; grid-column: span 2;">
+        <div class="form-group" style="flex: 1;">
+          <label>📅 Data do Contato</label>
+          <input type="date" id="dataContato">
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>⏰ Horário do Contato</label>
+          <input type="time" id="horaContato" value="00:00">
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label>💬 Motivo do contato via Teams</label>
+        <textarea id="motivoTeams" rows="3" placeholder="Descreva o motivo do contato via Teams..."></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label>📞 Observação via Telefone</label>
+        <textarea id="obsTelefone" rows="3" placeholder="Observação da tentativa de contato por telefone..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>👤 Status do colaborador (Teams)</label>
+        <select id="status">
+          <option value="Disponível">Disponível</option>
+          <option value="Ocupado">Ocupado</option>
+          <option value="Ausente">Ausente</option>
+          <option value="Offline">Offline</option>
+          <option value="Apresentando">Apresentando</option>
+          <option value="Em Reunião">Em Reunião</option>
+          <option value="Ausência Temporária">Ausência Temporária</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="gerarLog()">📋 Gerar Log</button>
+      <button class="btn btn-secondary" onclick="copiarLog()">📄 Copiar Log</button>
+      <button class="btn btn-secondary" onclick="limparFormulario()">🗑️ Limpar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Log gerado (copie e cole no chamado)</h3>
+    <div class="log-preview" id="Log">Clique em "Gerar Log" para começar</div>
+  </div>
+
+  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+</div>
+
+<button id="darkModeToggle" class="btn-toggle-dark-fixed" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+<script src="../js/main.js"></script>
+<script>
+  window.gerarLog = function() {
+
+      if (!validarCamposObrigatorios()) return;
+    const tentativa = document.getElementById('tentativa').value;
+    const periodo = document.getElementById('periodo').value;
+    const data = document.getElementById('dataContato').value;
+    const hora = document.getElementById('horaContato').value;
+    const motivoTeams = document.getElementById('motivoTeams').value.trim();
+    const obsTelefone = document.getElementById('obsTelefone').value.trim();
+    const status = document.getElementById('status').value;
+
+    if (!data) {
+      mostrarToast('⚠️ Por favor, selecione a data do contato!', 'warning');
+      return;
+    }
+
+    const [ano, mes, dia] = data.split('-');
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    let logTexto = `Prezado usuário, ${periodo}\n` +
+      `${tentativa}\n\n` +
+      `Data: ${dataFormatada}\n` +
+      `Horário: ${hora}\n` +
+      `(X) Telefone - Feita a tentativa de contato via telefone, sem sucesso.\n`;
+
+    if (obsTelefone) logTexto += `Obs: ${obsTelefone}\n`;
+    logTexto += `(X) Microsoft Teams - Aguardado o tempo de 05 minutos e não houve retorno.\n` +
+      `Obs: Status no Teams como ${status}\n`;
+    if (motivoTeams) logTexto += `Motivo do Contato: ${motivoTeams}`;
+
+    document.getElementById('Log').innerHTML = logTexto.replace(/\n/g, '<br>');
+    mostrarToast('✅ Log gerado!', 'success');
+  };
+</script>
+</body>
+</html>

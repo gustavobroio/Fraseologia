@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Devolução para Estoque</title>
+
+<link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <a href="https://experian.okta.com" target="_blank">
+  <img src="../assets/images/logo_serasa.png" 
+       alt="Serasa" 
+       class="logo" 
+       onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+</a>
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h1>Devolução para Estoque</h1>
+    <div class="info-link">
+      📌 <strong>Formulário de devolução para o estoque:</strong> 
+      <a href="https://experian.service-now.com/now/nav/ui/classic/params/target/com.glideapp.servicecatalog_cat_item_view.do%3Fv%3D1%26sysparm_id%3D758ccd009307791467ce3024fbba1063" target="_blank">Clique Aqui</a>
+    </div>
+    <p>Preencha todos os campos e clique em "Gerar Log".</p>
+    <div class="dica">
+      ⚠️ <strong>Atenção:</strong> Para devolução de equipamentos, abra o formulário acima antes de registrar o log.
+    </div>
+    <hr>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📝 Motivo da Devolução</label>
+        <textarea id="Motivo" rows="4" placeholder="Descreva o motivo da devolução..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>🏷️ Ativo (Patrimônio)</label>
+        <input type="text" id="Ativo" placeholder="Número do ativo">
+      </div>
+      <div class="form-group">
+        <label>🔢 S/N</label>
+        <input type="text" id="SN" placeholder="Número de série">
+      </div>
+      <div class="form-group">
+        <label>📦 Item(ns) devolvido(s)</label>
+        <input type="text" id="Itens" placeholder="Ex: Computador, monitor, teclado">
+      </div>
+      <div class="form-group">
+        <label>👤 Colaborador</label>
+        <input type="text" id="Colaborador" placeholder="Nome completo">
+      </div>
+      <div class="form-group">
+        <label>🔑 Login</label>
+        <input type="text" id="Login" placeholder="Login de rede">
+      </div>
+      <div class="form-group">
+        <label>📧 E-Mail</label>
+        <input type="email" id="Email" placeholder="email@empresa.com">
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="gerarLog()">📋 Gerar Log</button>
+      <button class="btn btn-secondary" onclick="copiarLog()">📄 Copiar Log</button>
+      <button class="btn btn-secondary" onclick="limparFormulario()">🗑️ Limpar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Log gerado (copie e cole no chamado)</h3>
+    <div class="log-preview" id="Log">Clique em "Gerar Log" para começar</div>
+  </div>
+
+  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+</div>
+
+<button id="darkModeToggle" class="btn-toggle-dark-fixed" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+<script src="../js/main.js"></script>
+<script>
+  window.gerarLog = function() {
+
+    if (!validarCamposObrigatorios()) return;
+
+    const motivo = document.getElementById('Motivo').value.trim();
+    const ativo = document.getElementById('Ativo').value.trim();
+    const sn = document.getElementById('SN').value.trim();
+    const itens = document.getElementById('Itens').value.trim();
+    const colaborador = document.getElementById('Colaborador').value.trim();
+    const login = document.getElementById('Login').value.trim();
+    const email = document.getElementById('Email').value.trim();
+
+    // Validação: pelo menos o motivo ou um campo deve estar preenchido
+    if (!motivo && !ativo && !sn && !itens && !colaborador && !login && !email) {
+      mostrarToast('⚠️ Preencha pelo menos um campo antes de gerar o log!', 'warning');
+      return;
+    }
+
+    let logTexto = '';
+    if (motivo) logTexto += `Devolução pelo Motivo: ${motivo}\n\n`;
+    if (ativo) logTexto += `Ativo: ${ativo}\n`;
+    if (sn) logTexto += `S/N: ${sn}\n`;
+    if (itens) logTexto += `Item(ns) devolvido(s): ${itens}\n`;
+    if (colaborador) logTexto += `Colaborador: ${colaborador}\n`;
+    if (login) logTexto += `Login: ${login}\n`;
+    if (email) logTexto += `Email: ${email}`;
+
+    // Remove quebra de linha extra no final, se necessário
+    logTexto = logTexto.trim();
+
+    document.getElementById('Log').innerHTML = logTexto.replace(/\n/g, '<br>');
+    mostrarToast('✅ Log gerado!', 'success');
+  };
+</script>
+</body>
+</html>

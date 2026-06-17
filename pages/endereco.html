@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Endereço e CNPJ</title>
+
+<link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <a href="https://experian.okta.com" target="_blank">
+  <img src="../assets/images/logo_serasa.png" 
+       alt="Serasa" 
+       class="logo" 
+       onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+</a>
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h1>Endereço e CNPJ</h1>
+    <p>Selecione a localidade desejada para obter o endereço completo e CNPJ.</p>
+    <div class="dica">
+      💡 As informações são geradas automaticamente com base na localidade escolhida.
+    </div>
+    <hr>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📍 Localidade</label>
+       <select id="localidade">
+
+<option value="Endereço portaria 1
+Avenida Presidente Juscelino Kubitscheck
+Nº 100
+Complemento: Serasa Experian
+Bairro: Jardim Nova São Carlos
+Cidade: São Carlos
+Estado: SP
+CEP: 13571-410
+Endereço portaria 2
+Avenida Doutor Heitor José Reali
+Nº 360
+Distrito industrial Miguel Abdelnur
+Cidade: São Carlos
+Estado: SP
+CEP: 13571-385
+Local Serasa Experian
+CNPJ: 62.173.620/0093-06
+IE: Isenta">
+JK (São Carlos)
+</option>
+
+<option value="Serasa Experian – São Paulo
+Av. das Nações Unidas, 14.401 – Torre C (Sucupira), 24º andar
+Cidade: São Paulo
+Estado: SP
+CEP: 04794-000
+CNPJ: 62.173.620/0001-80
+IE: Isento">
+PDC (São Paulo)
+</option>
+
+<option value="Serasa Experian – Blumenau
+Rua Almirante Tamandaré, nº 1024 – Vila Nova
+Cidade: Blumenau
+Estado: SC
+CEP: 89035-000
+CNPJ: 62.173.620/0104-95
+IE: Isento">
+Blumenau
+</option>
+
+<option value="Serasa Experian – Brasília
+SCS QD 02 BL C, 4º andar – Ed. Paulo Sarasate
+Cidade: Brasília
+Estado: DF
+CEP: 70302-911
+CNPJ: 62.173.620/0131-68
+IE: Isento">
+Brasília
+</option>
+
+<option value="Serasa Experian – Recife
+Rua Senador José Henrique, nº 231, 2º andar
+Edifício Charles Darwin – Ilha do Leite
+Cidade: Recife
+Estado: PE
+CEP: 50070-460
+CNPJ: 62.173.620/0133-20
+IE: Isento">
+Recife
+</option>
+
+<option value="SalaryFits Sistemas LTDA
+Alameda Oscar Niemeyer, 132 – Sala 1101 e 1102
+Cidade: Nova Lima
+Estado: MG
+CEP: 34006-049
+CNPJ: 35.674.327/0001-23
+IE: Isento">
+SalaryFits (Nova Lima)
+</option>
+
+</select>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="gerarLog()">📋 Gerar Log</button>
+      <button class="btn btn-secondary" onclick="copiarLog()">📄 Copiar Log</button>
+      <button class="btn btn-secondary" onclick="limparFormulario()">🗑️ Limpar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Log gerado (copie e cole no chamado)</h3>
+    <div class="log-preview" id="Log">Clique em "Gerar Log" para começar</div>
+  </div>
+
+  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+</div>
+
+<button id="darkModeToggle" class="btn-toggle-dark-fixed" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+<script src="../js/main.js"></script>
+<script>
+  window.gerarLog = function() {
+
+      if (!validarCamposObrigatorios()) return;
+    const localidade = document.getElementById('localidade').value;
+    
+    if (!localidade) {
+      mostrarToast('⚠️ Selecione uma localidade!', 'warning');
+      return;
+    }
+
+    // Preserva as quebras de linha originais (o valor do option já contém \n)
+    document.getElementById('Log').innerHTML = localidade.replace(/\n/g, '<br>');
+    mostrarToast('✅ Log gerado!', 'success');
+  };
+</script>
+</body>
+</html>

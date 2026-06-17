@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Agendamento</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <button class="menu-toggle" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+      <a href="https://experian.okta.com" target="_blank">
+        <img src="../assets/images/logo_serasa.png"
+             alt="Serasa"
+             class="logo"
+             onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+      </a>
+
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+
+      <img src="../assets/images/logo_tivit.png"
+           alt="Tivit"
+           class="logo"
+           onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- FORM -->
+  <div class="card">
+    <h1>Agendamento</h1>
+    <p>Preencha a data e hora do agendamento.</p>
+
+    <div class="dica">
+      ⚠️ <strong>Importante:</strong> Status do chamado deve ser 
+      <strong>On Hold (Em Espera)</strong> com motivo 
+      <strong>Awaiting Caller (Aguardando Solicitante)</strong>.<br>
+
+      🔔 <strong>NÃO ESQUEÇA DE ANEXAR A EVIDÊNCIA DO AGENDAMENTO NO CHAMADO.</strong>
+    </div>
+
+    <hr>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📅 Data do Agendamento</label>
+        <input type="date" id="dataAgendamento" required>
+      </div>
+
+      <div class="form-group">
+        <label>⏰ Hora do Agendamento</label>
+        <input type="time" id="horaAgendamento" value="09:00" required>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="gerarLog()">📋 Gerar Log</button>
+      <button class="btn btn-secondary" onclick="copiarLog()">📄 Copiar Log</button>
+      <button class="btn btn-secondary" onclick="limparFormulario()">🗑️ Limpar</button>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div class="card">
+    <h3>📝 Log gerado (copie e cole no chamado)</h3>
+    <div class="log-preview" id="Log">
+      Clique em "Gerar Log" para começar
+    </div>
+  </div>
+
+  <div class="version-badge">
+    Fraseologia v2.0 • Desenvolvido por Field Service
+  </div>
+
+</div>
+
+<!-- DARK MODE -->
+<button id="darkModeToggle"
+        class="btn-toggle-dark-fixed"
+        onclick="toggleDarkMode()">
+  🌙 Dark Mode
+</button>
+
+<script src="../js/main.js"></script>
+
+<script>
+window.gerarLog = function () {
+
+  // ✅ validação obrigatória
+  if (!validarCamposObrigatorios()) return;
+
+  const dataInput = document.getElementById('dataAgendamento').value;
+  const hora = document.getElementById('horaAgendamento').value;
+
+  const [ano, mes, dia] = dataInput.split('-');
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+
+  const logTexto = `Atendimento agendado, conforme solicitado pelo colaborador para: ${dataFormatada} às ${hora}.`;
+
+  document.getElementById('Log').innerHTML = logTexto;
+  mostrarToast('✅ Log gerado!', 'success');
+};
+</script>
+
+</body>
+</html>

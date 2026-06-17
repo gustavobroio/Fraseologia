@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Cancelamento</title>
+
+<link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <a href="https://experian.okta.com" target="_blank">
+  <img src="../assets/images/logo_serasa.png" 
+       alt="Serasa" 
+       class="logo" 
+       onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+</a>
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h1>Cancelamento</h1>
+    <p>Cancelamento permitido apenas para <strong>abertura indevida</strong> ou <strong>duplicidade</strong>.</p>
+    <div class="dica">
+      🔔 <strong>NÃO ESQUEÇA DE ANEXAR A EVIDÊNCIA DO CANCELAMENTO NO CHAMADO.</strong>
+    </div>
+    <hr>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>📋 Tipo de Cancelamento</label>
+        <select id="tipoCancelamento">
+          <option value="">Selecione</option>
+          <option value="indevido">Abertura indevida</option>
+          <option value="duplicado">Duplicidade</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>🔢 Número do chamado correto</label>
+        <input type="text" id="chamadoCorreto" placeholder="Ex: INC123456">
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="gerarLog()">📋 Gerar Log</button>
+      <button class="btn btn-secondary" onclick="copiarLog()">📄 Copiar Log</button>
+      <button class="btn btn-secondary" onclick="limparFormulario()">🗑️ Limpar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Log gerado (copie e cole no chamado)</h3>
+    <div class="log-preview" id="Log">Clique em "Gerar Log" para começar</div>
+  </div>
+
+  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+</div>
+
+<script src="../js/main.js"></script>
+
+<script>
+window.gerarLog = function() {
+
+  const tipo = document.getElementById('tipoCancelamento').value;
+  const chamado = document.getElementById('chamadoCorreto').value.trim();
+
+  if (!tipo) {
+    mostrarToast('⚠️ Selecione o tipo de cancelamento!', 'warning');
+    return;
+  }
+  if (!chamado) {
+    mostrarToast('⚠️ Informe o número do chamado correto!', 'warning');
+    return;
+  }
+
+  let logTexto = '';
+
+  if (tipo === 'indevido') {
+    logTexto = `Trata-se de um registro indevido de ticket.
+Chamado aberto incorretamente, devendo ser tratado como requisição.
+Chamado correto: ${chamado}.
+Atendimento será realizado através do chamado informado.
+Evidência em anexo.`;
+  } 
+  else if (tipo === 'duplicado') {
+    logTexto = `Trata-se de um chamado duplicado.
+Atendimento será realizado através do chamado: ${chamado}.
+Evidência em anexo.`;
+  }
+
+  document.getElementById('Log').innerHTML = logTexto.replace(/\n/g, '<br>');
+  mostrarToast('✅ Log gerado!', 'success');
+};
+
+window.copiarLog = function() {
+  const logDiv = document.getElementById('Log');
+  const texto = logDiv.innerText;
+
+  if (!texto || texto.includes('Clique em "Gerar Log"')) {
+    mostrarToast('⚠️ Gere o log antes de copiar!', 'warning');
+    return;
+  }
+
+  navigator.clipboard.writeText(texto);
+  alert("✅ Log copiado com sucesso!");
+};
+</script>
+
+</body>
+</html>

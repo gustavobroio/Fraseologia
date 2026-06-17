@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraseologia - Gerador de Senha</title>
+
+  <link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .password-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .password-display {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .password-display .password-input {
+      flex: 1;
+    }
+    .password-display .password-input input {
+      width: 100%;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 1.5rem;
+      border: none;
+      background: #f8f9fa;
+      color: #000000;
+      outline: none;
+      cursor: default;
+      user-select: none;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+    body.dark-mode .password-display .password-input input {
+      background: #1e293b;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .security-bar {
+      height: 6px;
+      background: var(--border);
+    }
+    .security-bar .bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.2s;
+    }
+    .bar.critical { background: #dc3545; }
+    .bar.warning { background: #ffc107; }
+    .bar.safe { background: #28a745; }
+
+    .password-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .password-actions button {
+      background: transparent;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      transition: background 0.2s;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+    .password-actions button:hover {
+      background: var(--border);
+    }
+
+    .customize-panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .customize-panel h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    .customize-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .length-control {
+      flex: 1;
+      min-width: 180px;
+    }
+    .length-control label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .length-control input {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    .checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .checkbox-item input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+    .checkbox-item span {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    /* Ajuste para que o link ativo (active) tenha prioridade sobre a classe "destaque" */
+    .nav-menu li a.active,
+    .nav-menu li a.destaque.active {
+      background: white !important;
+      color: var(--primary) !important;
+      font-weight: 700 !important;
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    body.dark-mode .nav-menu li a.active,
+    body.dark-mode .nav-menu li a.destaque.active {
+      background: var(--primary) !important;
+      color: white !important;
+      box-shadow: none;
+    }
+
+    @media (max-width: 640px) {
+      .password-display { flex-direction: column; align-items: stretch; }
+      .password-actions { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-top">
+      <a href="https://experian.okta.com" target="_blank">
+        <img src="../assets/images/logo_serasa.png" 
+             alt="Serasa" 
+             class="logo" 
+             onerror="this.src='https://placehold.co/120x40?text=Serasa'">
+      </a>
+      <div class="sistema-titulo">FRASEOLOGIA</div>
+      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav-menu">
+      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
+      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
+      <li><a href="agendamento.html">Agendamento</a></li>
+      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
+      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
+      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
+      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
+      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
+      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
+      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
+      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
+      <li><a href="encerramento.html">Encerramento</a></li>
+      <li><a href="cancelamento.html">Cancelamento</a></li>
+      <li><a href="endereco.html">Endereço</a></li>
+      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+
+      <!-- ✅ ROLLOUT CORRIGIDO -->
+      <li class="rollout">
+        <a href="#" class="rollout-toggle">Rollout ▾</a>
+
+        <ul class="rollout-submenu">
+          <li><a href="#" onclick="return false;">Início deploy</a></li>
+          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
+          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
+          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
+          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
+          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="password-container">
+    <div class="password-display">
+      <div class="password-input">
+        <input type="text" id="passwordOutput" readonly>
+      </div>
+    </div>
+    <div class="security-bar">
+      <div id="securityBar" class="bar"></div>
+    </div>
+    <div class="password-actions">
+      <button id="renewBtn">🔄 Nova senha</button>
+      <button id="copyBtn">📋 Copiar senha</button>
+    </div>
+  </div>
+
+  <div class="customize-panel">
+    <h3>⚙️ Personalizar senha</h3>
+    <div class="customize-controls">
+      <div class="length-control">
+        <label>Tamanho: <span id="lengthValue">12</span> caracteres</label>
+        <input type="range" id="lengthSlider" min="8" max="32" value="12">
+      </div>
+      <div class="checkboxes">
+        <label class="checkbox-item">
+          <input type="checkbox" id="uppercaseCheck" checked> <span>Maiúsculas (A-Z)</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="numbersCheck" checked> <span>Números (0-9)</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="symbolsCheck" checked> <span>Símbolos (@ # $)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+</div>
+
+<button id="darkModeToggle" class="btn-toggle-dark-fixed" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+<script src="../js/main.js"></script>
+<script>
+  const passwordOutput = document.getElementById('passwordOutput');
+  const lengthSlider = document.getElementById('lengthSlider');
+  const lengthValue = document.getElementById('lengthValue');
+  const uppercaseCheck = document.getElementById('uppercaseCheck');
+  const numbersCheck = document.getElementById('numbersCheck');
+  const symbolsCheck = document.getElementById('symbolsCheck');
+  const securityBar = document.getElementById('securityBar');
+  const renewBtn = document.getElementById('renewBtn');
+  const copyBtn = document.getElementById('copyBtn');
+
+  const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+  const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+  const symbols = '@#$';
+
+  function generatePassword() {
+    let availableChars = lowerCase;
+    let forcedChars = [];
+
+    if (uppercaseCheck.checked) {
+      availableChars += upperCase;
+      for (let i = 0; i < 2; i++) {
+        forcedChars.push(upperCase[Math.floor(Math.random() * upperCase.length)]);
+      }
+    }
+    if (numbersCheck.checked) {
+      availableChars += numbers;
+      for (let i = 0; i < 2; i++) {
+        forcedChars.push(numbers[Math.floor(Math.random() * numbers.length)]);
+      }
+    }
+    if (symbolsCheck.checked) {
+      availableChars += symbols;
+      for (let i = 0; i < 2; i++) {
+        forcedChars.push(symbols[Math.floor(Math.random() * symbols.length)]);
+      }
+    }
+
+    if (!uppercaseCheck.checked && !numbersCheck.checked && !symbolsCheck.checked) {
+      availableChars = lowerCase;
+      forcedChars = [];
+    }
+
+    const length = parseInt(lengthSlider.value);
+    let password = forcedChars.join('');
+
+    for (let i = password.length; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * availableChars.length);
+      password += availableChars[randomIndex];
+    }
+
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+    if (password.length > length) password = password.slice(0, length);
+
+    passwordOutput.value = password;
+    updateSecurityIndicator();
+  }
+
+  function updateSecurityIndicator() {
+    const length = parseInt(lengthSlider.value);
+    let score = 0;
+    if (uppercaseCheck.checked) score += 25;
+    if (numbersCheck.checked) score += 25;
+    if (symbolsCheck.checked) score += 30;
+    const lengthScore = Math.min(20, Math.floor((length - 8) * (20 / 24)));
+    score += lengthScore;
+    const percent = Math.min(100, score);
+    securityBar.style.width = `${percent}%`;
+    securityBar.classList.remove('critical', 'warning', 'safe');
+    if (percent < 50) securityBar.classList.add('critical');
+    else if (percent < 70) securityBar.classList.add('warning');
+    else securityBar.classList.add('safe');
+  }
+
+  function copyPassword() {
+    const password = passwordOutput.value;
+    if (!password) {
+      mostrarToast('⚠️ Nenhuma senha gerada ainda!', 'warning');
+      return;
+    }
+    navigator.clipboard.writeText(password).then(() => {
+      mostrarToast('✅ Senha copiada para a área de transferência!', 'success');
+    }).catch(() => {
+      mostrarToast('❌ Erro ao copiar senha', 'error');
+    });
+  }
+
+  lengthSlider.addEventListener('input', () => {
+    lengthValue.innerText = lengthSlider.value;
+    generatePassword();
+  });
+  uppercaseCheck.addEventListener('change', generatePassword);
+  numbersCheck.addEventListener('change', generatePassword);
+  symbolsCheck.addEventListener('change', generatePassword);
+  renewBtn.addEventListener('click', generatePassword);
+  copyBtn.addEventListener('click', copyPassword);
+
+  generatePassword();
+</script>
+</body>
+</html>
