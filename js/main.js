@@ -16,13 +16,12 @@ function toggleDarkMode() {
   mostrarToast(isDark ? 'Modo escuro ativado' : 'Modo claro ativado', 'info');
 }
 
-// Carrega Dark Mode
+
 function loadDarkModePreference() {
   const saved = localStorage.getItem('fraseologia-darkmode');
   const btn = document.getElementById('darkModeToggle');
-
+  // A classe já foi aplicada pelo script inline, então apenas sincronizamos o botão
   if (saved === 'true') {
-    document.body.classList.add('dark-mode');
     if (btn) btn.textContent = '☀️';
   } else {
     if (btn) btn.textContent = '🌙';

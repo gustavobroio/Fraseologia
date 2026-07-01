@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fraseologia - Substituição de Computador/periféricos</title>
 
+  <script>
+  (function() {
+    const darkMode = localStorage.getItem('fraseologia-darkmode');
+    if (darkMode === 'true') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  })();
+</script>
+
   <link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
   <link rel="stylesheet" href="../css/style.css">
 

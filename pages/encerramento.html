@@ -5,9 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fraseologia - Encerramento</title>
 
-  <link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
+<script>
+  (function() {
+    const darkMode = localStorage.getItem('fraseologia-darkmode');
+    if (darkMode === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+    // Sincroniza o botão assim que a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('darkModeToggle');
+      if (btn) {
+        btn.textContent = darkMode === 'true' ? '☀️' : '🌙';
+      }
+    });
+  })();
+</script>
 
 <body>
 <div class="container">
