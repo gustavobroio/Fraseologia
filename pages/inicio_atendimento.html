@@ -5,59 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fraseologia - Início de Atendimento</title>
 
-<link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
-
+  <link rel="icon" type="image/x-icon" href="../assets/images/serasa_favicon.ico">
   <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 <div class="container">
-  <div class="header">
-    <div class="header-top">
-      <a href="https://experian.okta.com" target="_blank">
-  <img src="../assets/images/logo_serasa.png" 
-       alt="Serasa" 
-       class="logo" 
-       onerror="this.src='https://placehold.co/120x40?text=Serasa'">
-</a>
-      <div class="sistema-titulo">FRASEOLOGIA</div>
-      <img src="../assets/images/logo_tivit.png" alt="Tivit" class="logo" onerror="this.src='https://placehold.co/120x40?text=Tivit'">
-    </div>
 
-    <!-- MENU -->
-    <ul class="nav-menu">
-      <li><a href="inicio_atendimento.html">Início de Atendimento</a></li>
-      <li><a href="tentativa_contato.html">Tentativa de contato</a></li>
-      <li><a href="agendamento.html">Agendamento</a></li>
-      <li><a href="pendente_usuario.html">Pendente usuário</a></li>
-      <li><a href="pendente_fornecedor.html">Pendente fornecedor</a></li>
-      <li><a href="pendente_estoque.html">Pendente estoque</a></li>
-      <li><a href="deploy_terceiro.html">Deploy Terceiro</a></li>
-      <li><a href="substituicao.html">Substituição de Computador/Periféricos</a></li>
-      <li><a href="solicitacao_periferico.html">Solicitação periféricos</a></li>
-      <li><a href="solicitacao_computador.html">Solicitação computador</a></li>
-      <li><a href="devolucao_estoque.html">Devolução para estoque</a></li>
-      <li><a href="encerramento.html">Encerramento</a></li>
-      <li><a href="cancelamento.html">Cancelamento</a></li>
-      <li><a href="endereco.html">Endereço</a></li>
-      <li><a href="gerador_de_senha.html" class="destaque">Gerador de Senha</a></li>
+  <!-- HEADER (topo + menu) carregado dinamicamente -->
+  <div id="header-placeholder"></div>
 
-      <!-- ✅ ROLLOUT CORRIGIDO -->
-      <li class="rollout">
-        <a href="#" class="rollout-toggle">Rollout ▾</a>
-
-        <ul class="rollout-submenu">
-          <li><a href="#" onclick="return false;">Início deploy</a></li>
-          <li><a href="#" onclick="return false;">Encerramento deploy</a></li>
-          <li><a href="#" onclick="return false;">Agendamento e Configuração da Máquina</a></li>
-          <li><a href="#" onclick="return false;">Encerramento rollout</a></li>
-          <li><a href="#" onclick="return false;">Encerramento de Configuração FY27</a></li>
-          <li><a href="#" onclick="return false;">Notebook Deploy Finalizado_FY27</a></li>
-          <li><a href="#" onclick="return false;">Notebook em Processo de Deploy_FY27</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
+  <!-- CONTEÚDO ESPECÍFICO DA PÁGINA -->
   <div class="card">
     <h1>Início de Atendimento</h1>
     <p>Inserir esta log ao iniciar o atendimento. Caso necessário, acrescente uma observação no campo abaixo.</p>
@@ -80,27 +38,40 @@
     </div>
   </div>
 
+  <!-- LOG -->
   <div class="card">
     <h3>📝 Log gerado (copie e cole no chamado)</h3>
-    <div class="log-preview" id="Log">Clique em "Gerar Log" para começar</div>
+    <div class="log-preview" id="Log">
+      Clique em "Gerar Log" para começar
+    </div>
   </div>
 
-  <div class="version-badge">Fraseologia v2.0 • Desenvolvido por Field Service</div>
+  <!-- FOOTER carregado dinamicamente -->
+  <div id="footer-placeholder"></div>
+
 </div>
 
-<button id="darkModeToggle" class="btn-toggle-dark-fixed" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+<!-- DARK MODE -->
+<button id="darkModeToggle"
+        class="btn-toggle-dark-fixed"
+        onclick="toggleDarkMode()">
+  🌙 Dark Mode
+</button>
 
 <script src="../js/main.js"></script>
+<script src="../js/components.js"></script>
+
 <script>
-  window.gerarLog = function() {
-    const obs = document.getElementById('observacao').value.trim();
-    let logTexto = "Reconhecimento de chamado. Iniciando atendimento nesse momento";
-    if (obs) {
-      logTexto += "\n" + obs;
-    }
-    document.getElementById('Log').innerHTML = logTexto.replace(/\n/g, '<br>');
-    mostrarToast('✅ Log gerado!', 'success');
-  };
+window.gerarLog = function() {
+  const obs = document.getElementById('observacao').value.trim();
+  let logTexto = "Reconhecimento de chamado. Iniciando atendimento nesse momento";
+  if (obs) {
+    logTexto += "\n" + obs;
+  }
+  document.getElementById('Log').innerHTML = logTexto.replace(/\n/g, '<br>');
+  mostrarToast('✅ Log gerado!', 'success');
+};
 </script>
+
 </body>
 </html>
